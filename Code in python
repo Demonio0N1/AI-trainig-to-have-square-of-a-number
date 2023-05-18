@@ -1,0 +1,23 @@
+import tensorflow as tf
+
+# Define the model
+model = tf.keras.Sequential()
+model.add(tf.keras.layers.Dense(5000, input_dim=1, activation='relu'))
+model.add(tf.keras.layers.Dense(5000, activation='relu'))
+model.add(tf.keras.layers.Dense(1))
+
+# Compile the model
+model.compile(optimizer='adam', loss='mean_squared_error')
+
+# Generate some synthetic data for training
+x_train = [1, 2, 3, 4, 5, 9, 16]
+y_train = [1, 4, 9, 16, 25, 81, 256]
+
+# Train the model
+model.fit(x_train, y_train, epochs=100)
+
+# Test the model
+x_test = [6, 7, 8, 9, 10]
+y_test = [36, 49, 64, 81, 100]
+test_loss = model.evaluate(x_test, y_test)
+print("Test:", test_loss)
